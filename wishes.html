@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Valentine’s Day ❤️ TOTO ❤️</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(120deg, #ff758c, #ff7eb3);
+        color: white;
+        text-align: center;
+        overflow-x: hidden;
+        transition: background 1s ease;
+    }
+
+    .container {
+        padding: 40px 20px;
+        max-width: 600px;
+        margin: auto;
+    }
+
+    h1 {
+        font-size: 2.5em;
+        text-shadow: 0 0 20px rgba(255,255,255,0.6);
+    }
+
+    .question-box {
+        margin-top: 40px;
+        padding: 30px;
+        background: rgba(255,255,255,0.15);
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 30px rgba(255,0,100,0.4);
+        animation: fadeIn 1s ease;
+    }
+
+    .question {
+        font-size: 1.4em;
+        margin-bottom: 25px;
+    }
+
+    button {
+        padding: 12px 25px;
+        margin: 10px;
+        font-size: 1em;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .yes {
+        background: #ff4d6d;
+        color: white;
+        box-shadow: 0 0 15px rgba(255,77,109,0.8);
+    }
+
+    .no {
+        background: #444;
+        color: white;
+    }
+
+    button:hover {
+        transform: scale(1.1);
+    }
+
+    .message {
+        margin-top: 20px;
+        font-size: 1.1em;
+        min-height: 30px;
+    }
+
+    .heart {
+        position: fixed;
+        bottom: -20px;
+        font-size: 24px;
+        animation: floatUp 4s linear forwards;
+        opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+        to {
+            transform: translateY(-110vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Happy Valentine’s Day ❤️ TOTO ❤️</h1>
+    <p>Answer these honestly… my heart depends on it 😘</p>
+
+    <div class="question-box">
+        <div class="question" id="question"></div>
+        <button class="yes" onclick="answerYes()">Yes 💖</button>
+        <button class="no" onclick="answerNo()">No 😜</button>
+        <div class="message" id="message"></div>
+    </div>
+</div>
+
+<script>
+const questions = [
+    "Do you love me more than chocolate? 🍫",
+    "Do I make you smile even on bad days? 😊",
+    "Would you choose me again in every lifetime? 💫",
+    "Am I your favorite human? 😌",
+    "Do you feel safe and happy with me? 🫶",
+    "Do you like my silly side? 🤪",
+    "Can I hold your hand forever? ✋❤️",
+    "Do you believe we’re a perfect team? 👫",
+    "Do I make your heart go boom boom? 💥❤️",
+    "Will you be my Valentine forever? 💍"
+];
+
+const colors = [
+    "linear-gradient(120deg, #ff9a9e, #fad0c4)",
+    "linear-gradient(120deg, #a18cd1, #fbc2eb)",
+    "linear-gradient(120deg, #fbc2eb, #a6c1ee)",
+    "linear-gradient(120deg, #fdcbf1, #e6dee9)",
+    "linear-gradient(120deg, #ffecd2, #fcb69f)",
+    "linear-gradient(120deg, #ff8177, #ff867a)",
+    "linear-gradient(120deg, #c471f5, #fa71cd)",
+    "linear-gradient(120deg, #43e97b, #38f9d7)",
+    "linear-gradient(120deg, #fa709a, #fee140)",
+    "linear-gradient(120deg, #30cfd0, #330867)"
+];
+
+let index = 0;
+
+const questionEl = document.getElementById("question");
+const messageEl = document.getElementById("message");
+
+function loadQuestion() {
+    if (index < questions.length) {
+        questionEl.innerText = questions[index];
+        messageEl.innerText = "";
+    } else {
+        questionEl.innerText = "You just made me the luckiest person alive 💖";
+        messageEl.innerHTML = "I love you endlessly 🥰✨";
+    }
+}
+
+function answerYes() {
+    document.body.style.background = colors[index % colors.length];
+    createHearts();
+    messageEl.innerText = "Aww… my heart just melted 😍";
+    index++;
+    setTimeout(loadQuestion, 800);
+}
+
+function answerNo() {
+    messageEl.innerText = "Hmm… are you sure? 😜 Try again!";
+}
+
+function createHearts() {
+    for (let i = 0; i < 12; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerText = ["❤️","💖","💕","💘","😍","🥰"][Math.floor(Math.random()*6)];
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (3 + Math.random()*2) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+    }
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>
